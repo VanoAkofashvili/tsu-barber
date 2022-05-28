@@ -1,15 +1,28 @@
-import { encode, decode } from './utils';
+import { encode, decode, delay, generateToken } from './utils';
 const DELAY_TIME = 1000; // 1s
-
+const SALT = 'asdf';
 let barbers = [];
 let clients = [];
 
-async function delay(callback) {
-  return new Promise((res, rej) => {
-    setTimeout(() => {
-      callback(res, rej);
-    }, DELAY_TIME);
+export function login({ email, password }) {
+  return delay((resolve, reject) => {
+    const user = clients.find((user) => user.email === email);
+    if (!user) reject("User doesn't exist");
+
+    if (encode(password) === user.password) {
+      resolve({
+        success: true,
+        secretToken: generateToken(salt, user.id),
+        user: user,
+      });
+    } else {
+      reject({ password: "Password isn't corrent" });
+    }
   });
+}
+
+export function getAllBarbers() {
+  return barbers;
 }
 
 function registerBarber(barber) {
@@ -47,15 +60,15 @@ function registerBarber(barber) {
   });
 }
 
-async function registerClient({ phone, password, confirmPassword }) {
+async function registerClient({ email, password, confirmPassword }) {
   return delay((resolve, reject) => {
     if (confirmPassword !== password)
       reject({ passwordConfirmation: "Passwords don't match" });
-    if (!phone) reject({ phone: "Phone shouldn't be empty" });
+    if (!email) reject({ email: "Email shouldn't be empty" });
 
     const newClient = {
       id: clients.length,
-      phone,
+      email,
       password: encode(password),
     };
 
