@@ -1,22 +1,14 @@
-import { first, map } from 'lodash';
+import { map } from 'lodash';
 import { useEffect, useState } from 'react';
-import { getAllBarbers } from '../../api/auth';
+import { Link } from 'react-router-dom';
+import { getAllBarbers } from '../../api';
+import { useQuery } from '../../hooks/useQuery';
 import { Button } from '../Atoms';
 import Spinner from '../Spinner';
 import Search from './Search';
-import Sidebar from './Sidebar';
 
 const AllBarbers = () => {
-  const [allBarbers, setAllBarbers] = useState([]);
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    setLoading(true);
-    getAllBarbers()
-      .then((data) => setAllBarbers(data))
-      .catch((e) => console.error(e))
-      .finally(() => setLoading(false));
-  }, []);
+  const { data: allBarbers, loading } = useQuery(getAllBarbers);
 
   return (
     <>
@@ -61,7 +53,9 @@ const AllBarbers = () => {
                   <p className="flex-1">{lastName}</p>
                   <div className="flex-1 flex items-center justify-between">
                     <p className="flex-grow-1">${price}</p>
-                    <Button className="p-2 w-auto">Details</Button>
+                    <Button className="p-2 w-auto">
+                      <Link to={`${id}`}>Details</Link>
+                    </Button>
                   </div>
                 </div>
               );

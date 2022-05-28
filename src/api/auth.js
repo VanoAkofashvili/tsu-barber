@@ -1,37 +1,6 @@
 import { SALT } from './constants';
 import { encode, delay, generateToken } from './utils';
-
-let barbers = [
-  {
-    id: 1,
-    firstName: 'vaniko',
-    lastName: 'akopashvili',
-    email: 'vanikoakofa@mgial.com',
-    address: 'tbilisi',
-    price: 100,
-    password: 'vano1234',
-  },
-  {
-    id: 2,
-    firstName: 'vaniko',
-    lastName: 'akopashvili',
-    email: 'vanikoakofa@mgial.com',
-    address: 'tbilisi',
-    price: 100,
-    password: 'vano1234',
-  },
-  {
-    id: 3,
-    firstName: 'vaniko',
-    lastName: 'akopashvili',
-    email: 'vanikoakofa@mgial.com',
-    address: 'tbilisi',
-    price: 100,
-    password: 'vano1234',
-  },
-];
-let clients = [];
-
+import { barbers, clients } from './db';
 export function setReview({ clientId, barberId, review, star }) {
   return delay((res, rej) => {
     const barber = barbers.find((barber) => barber.id === barberId);
@@ -44,12 +13,6 @@ export function setReview({ clientId, barberId, review, star }) {
       ...barber.reviews,
     ];
     res({ success: true });
-  });
-}
-
-export function getBarber({ id }) {
-  return delay((res, rej) => {
-    res(barbers.find((b) => b.id === id) || null);
   });
 }
 
@@ -67,12 +30,6 @@ export function login({ email, password }) {
     } else {
       reject({ password: "Password isn't corrent" });
     }
-  });
-}
-
-export function getAllBarbers() {
-  return delay((res) => {
-    res(barbers);
   });
 }
 

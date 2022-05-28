@@ -1,7 +1,6 @@
 import { Form, Formik } from 'formik';
 import { Button, Input } from '../../Atoms';
 import * as Yup from 'yup';
-import { phoneRegExp } from '../../../helpers/regexp';
 import { registerBarber } from '../../../api/auth';
 import { toast } from 'react-toastify';
 
