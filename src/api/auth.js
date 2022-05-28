@@ -1,7 +1,35 @@
 import { SALT } from './constants';
 import { encode, delay, generateToken } from './utils';
 
-let barbers = [];
+let barbers = [
+  {
+    id: 1,
+    firstName: 'vaniko',
+    lastName: 'akopashvili',
+    email: 'vanikoakofa@mgial.com',
+    address: 'tbilisi',
+    price: 100,
+    password: 'vano1234',
+  },
+  {
+    id: 2,
+    firstName: 'vaniko',
+    lastName: 'akopashvili',
+    email: 'vanikoakofa@mgial.com',
+    address: 'tbilisi',
+    price: 100,
+    password: 'vano1234',
+  },
+  {
+    id: 3,
+    firstName: 'vaniko',
+    lastName: 'akopashvili',
+    email: 'vanikoakofa@mgial.com',
+    address: 'tbilisi',
+    price: 100,
+    password: 'vano1234',
+  },
+];
 let clients = [];
 
 export function login({ email, password }) {
@@ -22,7 +50,9 @@ export function login({ email, password }) {
 }
 
 export function getAllBarbers() {
-  return barbers;
+  return delay((res) => {
+    res(barbers);
+  });
 }
 
 function registerBarber(barber) {
