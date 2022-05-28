@@ -1,3 +1,5 @@
+import { DELAY_TIME } from './constants';
+
 export function encode(str) {
   return btoa(encodeURIComponent(str));
 }

@@ -1,18 +1,18 @@
-import { encode, decode, delay, generateToken } from './utils';
-const DELAY_TIME = 1000; // 1s
-const SALT = 'asdf';
+import { SALT } from './constants';
+import { encode, delay, generateToken } from './utils';
+
 let barbers = [];
 let clients = [];
 
 export function login({ email, password }) {
   return delay((resolve, reject) => {
     const user = clients.find((user) => user.email === email);
-    if (!user) reject("User doesn't exist");
+    if (!user) return reject("User doesn't exist");
 
     if (encode(password) === user.password) {
       resolve({
         success: true,
-        secretToken: generateToken(salt, user.id),
+        secretToken: generateToken(SALT, user.id),
         user: user,
       });
     } else {

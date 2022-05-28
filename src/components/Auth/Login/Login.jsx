@@ -1,42 +1,45 @@
 import { Form, Formik } from 'formik';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import * as Yup from 'yup';
+import { login } from '../../../api/auth';
 import { Button, Input } from '../../Atoms';
 import AuthTemplate from '../AuthTemplate';
-import { phoneRegExp } from '../../../helpers/regexp';
 
 const Login = () => {
   return (
     <AuthTemplate title={'Login'}>
       <Formik
         initialValues={{
-          phone: '',
-          password: '',
+          email: 'vanikoakofa@gmail.com',
+          password: 'vano1234',
         }}
         validationSchema={Yup.object({
-          phone: Yup.string()
-            .matches(phoneRegExp, 'Phone number is not valid')
-            .required(),
-          password: Yup.string()
-            .min(8, 'Password is too short - min 8 characters')
-            .required(),
+          email: Yup.string().email().required(),
+          password: Yup.string().required(),
         })}
-        onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-          }, 400);
+        onSubmit={async (values, { setErrors }) => {
+          try {
+            const data = await login(values || {});
+            localStorage.setItem('token', data?.secretToken);
+          } catch (e) {
+            console.log(e);
+            if (typeof e === 'string') {
+              toast.error(e);
+            } else {
+              setErrors(e);
+            }
+          }
         }}
       >
         {(formik) => {
-          console.log(formik);
           return (
             <Form className="bg-white p-4">
               <Input
-                label="Phone Number"
-                name="phone"
-                type="text"
-                placeholder="+995 568-769-804"
+                label="Email"
+                name="email"
+                type="email"
+                placeholder="example@example.com"
               />
 
               <Input

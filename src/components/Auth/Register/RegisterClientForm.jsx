@@ -22,11 +22,7 @@ const RegisterClientForm = () => {
       })}
       onSubmit={async (values, { setErrors }) => {
         try {
-          const data = await registerClient({
-            password: values.password,
-            confirmPassword: values.confirmPassword,
-            email: values.phone,
-          });
+          const data = await registerClient(values);
         } catch (e) {
           setErrors(e);
         }
