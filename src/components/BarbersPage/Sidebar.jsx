@@ -1,6 +1,6 @@
 const Sidebar = () => {
   return (
-    <aside className="w-52 h-full">
+    <aside className="w-44 h-full flex-shrink-0">
       <div className="h-full py-4 px-3 bg-purple-dark dark:bg-gray-800">
         <ul className="space-y-2 h-full">
           <li>
