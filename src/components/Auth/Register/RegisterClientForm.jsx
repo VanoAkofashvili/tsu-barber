@@ -2,13 +2,15 @@ import { Form, Formik } from 'formik';
 import { Button, Input } from '../../Atoms';
 import * as Yup from 'yup';
 import { phoneRegExp } from '../../../helpers/regexp';
+import { registerClient } from '../../../api/auth';
 
 const RegisterClientForm = () => {
   return (
     <Formik
       initialValues={{
-        phone: '',
-        password: '',
+        phone: '12312321321',
+        password: 'vano1234',
+        confirmPassword: 'vano1234',
       }}
       validationSchema={Yup.object({
         phone: Yup.string()
@@ -21,15 +23,19 @@ const RegisterClientForm = () => {
           .required()
           .oneOf([Yup.ref('password'), null], 'Passwords must match'),
       })}
-      onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
-          setSubmitting(false);
-        }, 400);
+      onSubmit={async (values, { setErrors }) => {
+        try {
+          const data = await registerClient({
+            password: values.password,
+            confirmPassword: values.confirmPassword,
+            phone: values.phone,
+          });
+        } catch (e) {
+          setErrors(e);
+        }
       }}
     >
       {(formik) => {
-        console.log(formik);
         return (
           <Form className="bg-white p-4">
             <Input
