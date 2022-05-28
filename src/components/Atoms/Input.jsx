@@ -8,12 +8,12 @@ export const Input = ({ label, ...props }) => {
         {label}
       </label>
       <input
-        className="p-2 border border-gray-200 placeholder:text-sm placeholder:italic"
+        className="p-2 border border-gray-200 placeholder:text-sm placeholder:italic outline-none"
         {...field}
         {...props}
       />
       <div
-        className={`text-red-500 text-xs absolute top-full ${
+        className={`text-negative text-xs absolute top-full ${
           meta.touched && meta.error ? 'opacity-100' : 'opacity-0'
         }`}
       >

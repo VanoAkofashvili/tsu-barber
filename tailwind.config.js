@@ -22,6 +22,24 @@ module.exports = {
       backgroundImage: () => ({
         blurredWp: 'url(./src/static/auth.jpg)',
       }),
+      colors: {
+        black: '#121212',
+        white: '#ffffff',
+        negative: '#ff2b00',
+        grey: {
+          90: '#1C1C1E',
+          80: '#404044',
+          70: '#595959',
+          50: '#9A9A9A',
+          30: '#CCCCCC',
+          10: '#EAEAEA',
+          5: '#F5F5F5',
+        },
+        purple: {
+          light: '#5138ED',
+          dark: '#3521B5',
+        },
+      },
     },
   },
   plugins: [],
