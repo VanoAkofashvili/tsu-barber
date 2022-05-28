@@ -12,12 +12,45 @@ async function delay(callback) {
   });
 }
 
-function registerBarber({}) {}
+function registerBarber(barber) {
+  return delay((resolve, reject) => {
+    const {
+      firstName,
+      lastName,
+      email,
+      address,
+      price,
+      password,
+      confirmPassword,
+    } = barber;
+
+    [firstName, lastName, email, address, price, password, confirmPassword].map(
+      (field) => {
+        if (!field) reject(`Validation Erorr`);
+      }
+    );
+
+    if (password !== confirmPassword)
+      reject({ passwordConfirmation: "Passwords don't match" });
+
+    const newBarber = {
+      id: barbers.length,
+      ...barber,
+      password: encode(password),
+    };
+
+    delete newBarber.passwordConfirmation;
+
+    barbers = barbers.concat(newBarber);
+
+    resolve({ ...newBarber, password: undefined });
+  });
+}
 
 async function registerClient({ phone, password, confirmPassword }) {
   return delay((resolve, reject) => {
     if (confirmPassword !== password)
-      reject({ password: "Password don't match" });
+      reject({ passwordConfirmation: "Passwords don't match" });
     if (!phone) reject({ phone: "Phone shouldn't be empty" });
 
     const newClient = {
