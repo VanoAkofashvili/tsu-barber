@@ -10,7 +10,7 @@ import { Button } from '../Atoms';
 const BarberCard = ({ barber }) => {
   console.log(barber);
   return (
-    <div className="bg-neutral-50 w-1/3 flex flex-col gap-5 items-center">
+    <div className="bg-neutral-50 w-1/3 flex flex-col gap-5 items-center border-l border-t border-b border-grey-10 rounded-tl-md rounded-bl-md">
       <img
         src={defaultAvatar}
         alt="barber image"
@@ -35,7 +35,11 @@ const BarberCard = ({ barber }) => {
 };
 
 const BarberReviews = ({ reviews }) => {
-  return <div className="bg-slate-300 w-2/3">barber reviews</div>;
+  return (
+    <div className="bg-slate-300 w-2/3 border-t border-r border-b border-grey-10 rounded-tr-md rounded-br-md">
+      barber reviews
+    </div>
+  );
 };
 
 const BarberDetails = () => {
@@ -52,8 +56,8 @@ const BarberDetails = () => {
 
   return (
     <div className="w-full h-full flex p-10">
-      <BarberCard barber={barber} />
-      <BarberReviews reviews={barber.reviews} />
+      <BarberCard barber={barber || {}} />
+      <BarberReviews reviews={barber?.reviews} />
     </div>
   );
 };
