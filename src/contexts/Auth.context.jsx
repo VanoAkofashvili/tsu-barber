@@ -18,6 +18,10 @@ const AuthProvider = ({ children }) => {
       value={{
         token,
         setUser: (token) => {
+          if (!token) {
+            setToken(null);
+            return localStorage.removeItem('token');
+          }
           localStorage.setItem('token', token);
           setToken(+token);
         },
