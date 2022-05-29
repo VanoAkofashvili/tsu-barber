@@ -1,11 +1,12 @@
 import { Form, Formik } from 'formik';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import * as Yup from 'yup';
+
 import { useAuth } from '../../../contexts/Auth.context';
 import { Button, Input } from '../../Atoms';
+import { login } from '../../../services';
 import AuthTemplate from '..';
-import { login } from '../../../services/auth.service';
-import { toast } from 'react-toastify';
 
 const Login = () => {
   const { setUser } = useAuth();

@@ -1,11 +1,11 @@
 import { map } from 'lodash';
 import { useState } from 'react';
 import StartRatings from 'react-star-ratings';
+
 import clientAvatar from '../../../static/default_avatar.png';
 import { Button } from '../../Atoms';
-
 import { useAuth } from '../../../contexts/Auth.context';
-import { createReview } from '../../../services/barbers.service';
+import { createReview } from '../../../services';
 import { useLazyQuery } from '../../../hooks/useLazyQuery';
 
 const BarberReviews = ({ barberId, reviews = [], isOrdered, refetch }) => {

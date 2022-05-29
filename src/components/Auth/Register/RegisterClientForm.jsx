@@ -1,11 +1,11 @@
+import { useNavigate } from 'react-router-dom';
 import { Form, Formik } from 'formik';
 import { Button, Input } from '../../Atoms';
+import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 
 import { useAuth } from '../../../contexts/Auth.context';
-import { registerClient } from '../../../services/auth.service';
-import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
+import { registerClient } from '../../../services';
 
 const RegisterClientForm = () => {
   const auth = useAuth();

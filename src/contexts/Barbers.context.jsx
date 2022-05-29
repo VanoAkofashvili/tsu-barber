@@ -1,8 +1,8 @@
 import { debounce } from 'lodash';
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 
 import { useQuery } from '../hooks/useQuery';
-import { getAllBarbers } from '../services/barbers.service';
+import { getAllBarbers } from '../services';
 
 const BarbersContext = createContext();
 

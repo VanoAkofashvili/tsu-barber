@@ -1,9 +1,10 @@
 import { upperFirst } from 'lodash';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+
 import { useAuth } from '../../../contexts/Auth.context';
 import { useLazyQuery } from '../../../hooks/useLazyQuery';
-import { order } from '../../../services/barbers.service';
+import { order } from '../../../services';
 import defaultAvatar from '../../../static/barber.png';
 import { Button } from '../../Atoms';
 

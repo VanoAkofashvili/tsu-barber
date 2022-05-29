@@ -7,3 +7,6 @@ const httpClient = axios.create({
 });
 
 export default httpClient;
+
+export * from './auth.service';
+export * from './barbers.service';

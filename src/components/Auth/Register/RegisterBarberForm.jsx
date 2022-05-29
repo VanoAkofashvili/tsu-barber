@@ -1,8 +1,9 @@
 import { Form, Formik } from 'formik';
-import { Button, Input } from '../../Atoms';
-import * as Yup from 'yup';
 import { toast } from 'react-toastify';
-import { registerBarber } from '../../../services/auth.service';
+import * as Yup from 'yup';
+
+import { Button, Input } from '../../Atoms';
+import { registerBarber } from '../../../services';
 
 const RegisterBarberForm = () => {
   return (

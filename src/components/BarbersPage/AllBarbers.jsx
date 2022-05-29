@@ -1,6 +1,6 @@
 import { map } from 'lodash';
-import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+
 import { useBarbers } from '../../contexts/Barbers.context';
 import { Button } from '../Atoms';
 import Spinner from '../Spinner';
