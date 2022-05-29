@@ -1,5 +1,4 @@
 import { upperFirst } from 'lodash';
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useAuth } from '../../../contexts/Auth.context';

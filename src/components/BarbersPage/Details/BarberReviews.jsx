@@ -18,10 +18,6 @@ const BarberReviews = ({ barberId, reviews = [], isOrdered, refetch }) => {
     onCompleted: () => refetch(),
   });
 
-  // function handleReview() {
-  //   createReview(barberId, token, value, rating).then(() => refetch());
-  // }
-
   return (
     <div className="bg-slate-300 w-2/3 border-t border-r border-b border-grey-10 rounded-tr-md rounded-br-md overflow-y-auto">
       {map(reviews, function renderEachReview({ client, star, review }, index) {

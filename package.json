@@ -2,6 +2,7 @@
   "name": "barber_services",
   "private": true,
   "version": "0.0.0",
+  "author": "Vaniko Akopashvili",
   "scripts": {
     "dev": "vite",
     "server": "json-server --watch db.json --port 4000",
