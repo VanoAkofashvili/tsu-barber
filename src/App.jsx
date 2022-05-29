@@ -3,7 +3,7 @@ import NotFound from './components/NotFound';
 import Login from './components/Auth/Login/Login';
 import Register from './components/Auth/Register/Register';
 import BarbersPage from './components/BarbersPage';
-import BarberDetails from './components/BarbersPage/BarberDetails';
+import BarberDetails from './components/BarbersPage/Details/BarberDetails';
 import AllBarbers from './components/BarbersPage/AllBarbers';
 import AuthProvider from './contexts/Auth.context';
 function App() {

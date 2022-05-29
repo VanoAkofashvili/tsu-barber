@@ -13,8 +13,6 @@ const BarbersContextProvder = ({ children }) => {
   const { data, loading } = useQuery(getAllBarbers);
   const [allBarbers, setAllBarbers] = useState(data);
 
-  console.log(allBarbers, data);
-
   useEffect(() => {
     setAllBarbers(data);
   }, [data]);

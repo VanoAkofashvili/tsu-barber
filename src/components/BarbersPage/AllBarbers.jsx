@@ -1,10 +1,6 @@
 import { map } from 'lodash';
-import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { getAllBarbers } from '../../api';
-import { useAuth } from '../../contexts/Auth.context';
 import { useBarbers } from '../../contexts/Barbers.context';
-import { useQuery } from '../../hooks/useQuery';
 import { Button } from '../Atoms';
 import Spinner from '../Spinner';
 import Search from './Search';

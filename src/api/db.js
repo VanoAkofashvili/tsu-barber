@@ -18,12 +18,18 @@ export let barbers = [
     password: 'vano1234',
     reviews: [
       {
-        clientId: 1,
+        client: {
+          id: 1,
+          email: 'vanikoakofa@gmail.com',
+        },
         star: 5,
         review: 'Dzaan magari parikmaxeria',
       },
       {
-        clientId: 1,
+        client: {
+          id: 1,
+          email: 'vanikoakofa@gmail.com',
+        },
         star: 5,
         review: 'Dzaan magaria',
       },

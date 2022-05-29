@@ -1,20 +1,19 @@
-import { useNavigate, useParams } from 'react-router-dom';
-import { getBarber } from '../../api';
-import { useQuery } from '../../hooks/useQuery';
-import Spinner from '../Spinner';
-import defaultAvatar from '../../static/default_avatar.png';
 import { upperFirst } from 'lodash';
-import { Button } from '../Atoms';
-import { useAuth } from '../../contexts/Auth.context';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../../contexts/Auth.context';
+import defaultAvatar from '../../../static/barber.png';
+import { Button } from '../../Atoms';
+
 const BarberCard = ({ barber }) => {
   const { token } = useAuth();
   const navigate = useNavigate();
+
   return (
     <div className="bg-neutral-50 w-1/3 flex flex-col gap-5 items-center border-l border-t border-b border-grey-10 rounded-tl-md rounded-bl-md">
       <img
         src={defaultAvatar}
         alt="barber image"
-        className="rounded-full w-40 h-40 object-cover my-4"
+        className="rounded-full object-cover my-4"
       />
       <div className="flex items-center gap-4 justify-center ">
         <p className="text-md text-black font-medium">
@@ -41,31 +40,4 @@ const BarberCard = ({ barber }) => {
   );
 };
 
-const BarberReviews = ({ reviews }) => {
-  return (
-    <div className="bg-slate-300 w-2/3 border-t border-r border-b border-grey-10 rounded-tr-md rounded-br-md">
-      barber reviews
-    </div>
-  );
-};
-
-const BarberDetails = () => {
-  const { barberId } = useParams();
-  const { data: barber, loading } = useQuery(getBarber, { id: barberId });
-
-  if (loading)
-    return (
-      <div className="w-full flex justify-center">
-        <Spinner size="large" />
-      </div>
-    );
-
-  return (
-    <div className="w-full h-full flex p-10">
-      <BarberCard barber={barber || {}} />
-      <BarberReviews reviews={barber?.reviews} />
-    </div>
-  );
-};
-
-export default BarberDetails;
+export default BarberCard;
