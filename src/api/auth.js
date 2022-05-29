@@ -1,6 +1,6 @@
-import { SALT } from './constants';
-import { encode, delay, generateToken } from './utils';
+import { delay } from './utils';
 import { barbers, clients } from './db';
+
 export function setReview({ clientId, barberId, review, star }) {
   return delay((res, rej) => {
     const barber = barbers.find((barber) => barber.id === barberId);
@@ -21,10 +21,10 @@ export function login({ email, password }) {
     const user = clients.find((user) => user.email === email);
     if (!user) return reject("User doesn't exist");
 
-    if (encode(password) === user.password) {
+    if (password === user.password) {
       resolve({
         success: true,
-        secretToken: generateToken(SALT, user.id),
+        secretToken: user.id + 'secretToken',
         user: user,
       });
     } else {
@@ -57,7 +57,7 @@ function registerBarber(barber) {
     const newBarber = {
       id: barbers.length,
       ...barber,
-      password: encode(password),
+      password,
     };
 
     delete newBarber.passwordConfirmation;
@@ -77,7 +77,7 @@ async function registerClient({ email, password, confirmPassword }) {
     const newClient = {
       id: clients.length,
       email,
-      password: encode(password),
+      password,
     };
 
     clients = clients.concat(newClient);
