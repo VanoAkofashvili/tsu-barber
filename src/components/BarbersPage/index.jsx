@@ -1,12 +1,15 @@
 import { Outlet } from 'react-router-dom';
+import BarbersContextProvder from '../../contexts/Barbers.context';
 import Sidebar from './Sidebar';
 
 const BarbersPage = () => {
   return (
-    <div className="h-full flex w-full">
-      <Sidebar />
-      <Outlet />
-    </div>
+    <BarbersContextProvder>
+      <div className="h-full flex w-full">
+        <Sidebar />
+        <Outlet />
+      </div>
+    </BarbersContextProvder>
   );
 };
 
