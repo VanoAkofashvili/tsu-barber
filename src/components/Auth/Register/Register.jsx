@@ -36,8 +36,13 @@ const Register = () => {
           [REGISTER_TYPE.barber]: <RegisterBarberForm />,
         }[registerType]
       }
-      <div className="mt-2 text-black w-full flex justify-center">
-        <Link to="/">Login</Link>
+      <div className="mt-2 text-black">
+        <p className="text-sm mt-2">
+          Already have an Account?
+          <Link to="/" className="text-purple-dark font-medium ml-2">
+            Sign in
+          </Link>
+        </p>
       </div>
     </AuthTemplate>
   );

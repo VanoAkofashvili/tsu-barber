@@ -34,12 +34,13 @@ const Login = () => {
       >
         {(formik) => {
           return (
-            <Form className="bg-white p-4">
+            <Form className="mt-10">
               <Input
                 label="Email"
                 name="email"
                 type="email"
                 placeholder="example@example.com"
+                required
               />
 
               <Input
@@ -47,17 +48,23 @@ const Login = () => {
                 name="password"
                 type="password"
                 placeholder="******"
+                required
               />
 
               <Button type="submit" loading={formik.isSubmitting}>
-                Submit
+                Sign in
               </Button>
             </Form>
           );
         }}
       </Formik>
       <div className="mt-2 text-black">
-        <Link to="/register">Create account</Link>
+        <p className="text-sm mt-2">
+          Not registered yet?
+          <Link to="/register" className="text-purple-dark font-medium ml-2">
+            Create an account
+          </Link>
+        </p>
       </div>
     </AuthTemplate>
   );

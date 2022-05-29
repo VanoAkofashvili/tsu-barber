@@ -39,4 +39,10 @@ export let barbers = [
     password: 'vano1234',
   },
 ];
-export let clients = [];
+export let clients = [
+  {
+    id: 1,
+    email: 'vanikoakofa@gmail.com',
+    password: 'vano1234',
+  },
+];

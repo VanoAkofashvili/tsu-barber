@@ -38,6 +38,7 @@ module.exports = {
         purple: {
           light: '#5138ED',
           dark: '#3521B5',
+          bg: '#DCDFFF',
         },
       },
     },

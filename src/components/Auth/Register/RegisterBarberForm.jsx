@@ -91,7 +91,7 @@ const RegisterBarberForm = () => {
             />
 
             <Button type="submit" loading={formik.isSubmitting}>
-              Submit
+              Sign up
             </Button>
           </Form>
         );
