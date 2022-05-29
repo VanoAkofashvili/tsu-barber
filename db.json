@@ -19,8 +19,9 @@
       "email": "manano@gmail.com",
       "address": "Tbilisi, ganivis mimdebare teritoria",
       "price": 60,
-      "password": "mananiko123",
-      "clients": [1],
+      "clients": [
+        1
+      ],
       "reviews": [
         {
           "client": {
@@ -39,6 +40,27 @@
           "star": 0
         }
       ]
+    },
+    {
+      "firstName": "Firstname",
+      "lastName": "Lastname",
+      "email": "barber@gmail.com",
+      "address": "Tbilisi, Vake",
+      "price": 1000,
+      "clients": [
+        1
+      ],
+      "reviews": [
+        {
+          "client": {
+            "id": 1,
+            "email": "vanikoakofa@gmail.com"
+          },
+          "review": "Dzviria to",
+          "star": 1
+        }
+      ],
+      "id": 2
     }
   ]
 }

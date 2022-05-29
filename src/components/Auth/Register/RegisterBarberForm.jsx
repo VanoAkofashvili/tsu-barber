@@ -22,12 +22,6 @@ const RegisterBarberForm = () => {
         email: Yup.string().email().required(),
         address: Yup.string().required(),
         price: Yup.number().required().integer().positive(),
-        password: Yup.string()
-          .min(8, 'Password is too short - min 8 characters')
-          .required(),
-        confirmPassword: Yup.string()
-          .required()
-          .oneOf([Yup.ref('password'), null], 'Passwords must match'),
       })}
       onSubmit={async (values) => {
         try {
@@ -70,20 +64,6 @@ const RegisterBarberForm = () => {
             />
 
             <Input label="Price" name="price" type="number" placeholder="20" />
-
-            <Input
-              label="Password"
-              name="password"
-              type="password"
-              placeholder="******"
-            />
-
-            <Input
-              label="Confirm Password"
-              name="confirmPassword"
-              type="password"
-              placeholder="******"
-            />
 
             <Button type="submit" loading={formik.isSubmitting}>
               Sign up

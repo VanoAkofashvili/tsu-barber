@@ -18,7 +18,6 @@ export async function registerBarber({
   email,
   address,
   price,
-  password,
 }) {
   const { data: all } = await httpClient.get('/barbers');
   const exists = all.find((barber) => barber.email === email);
@@ -31,7 +30,7 @@ export async function registerBarber({
     email,
     address,
     price,
-    password,
+
     clients: [],
     reviews: [],
   });
