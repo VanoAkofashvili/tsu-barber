@@ -5,7 +5,7 @@ export function setReview({ userId, barberId, review, star }) {
   return delay((res, rej) => {
     const user = clients.find((c) => +c.id === +userId);
     const barber = barbers.find((barber) => barber.id === barberId);
-    console.log(barber);
+
     const reviews = barber.reviews || [];
 
     reviews.push({
@@ -29,7 +29,7 @@ export function login({ email, password }) {
     if (password === user.password) {
       resolve({
         success: true,
-        secretToken: user.id + '.secretToken',
+        secretToken: user.id,
       });
     } else {
       reject({ password: "Password isn't corrent" });
@@ -59,7 +59,9 @@ function registerBarber(barber) {
       reject({ passwordConfirmation: "Passwords don't match" });
 
     const newBarber = {
-      id: barbers.length,
+      id: barbers.length + 1,
+      clients: [],
+      reviews: [],
       ...barber,
       password,
     };
@@ -79,13 +81,13 @@ async function registerClient({ email, password, confirmPassword }) {
     if (!email) reject({ email: "Email shouldn't be empty" });
 
     const newClient = {
-      id: clients.length,
+      id: clients.length + 1,
       email,
       password,
     };
 
     clients.push(newClient);
-    resolve({ secretToken: newClient.id + '.secretToken' });
+    resolve({ secretToken: newClient.id });
   });
 }
 

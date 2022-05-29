@@ -2,7 +2,6 @@ import { useField } from 'formik';
 
 export const Input = ({ label, ...props }) => {
   const [field, meta] = useField(props);
-  console.log(props);
   return (
     <div className="flex flex-col mb-6 relative">
       <label

@@ -1,9 +1,10 @@
-import { debounce, filter, toUpper } from 'lodash';
+import { debounce } from 'lodash';
 import { createContext, useContext, useEffect, useState } from 'react';
-import { getAllBarbers } from '../api';
+
 import { useQuery } from '../hooks/useQuery';
 import { useAuth } from './Auth.context';
 import * as api from '../api';
+import { getAllBarbers } from '../services/barbers.service';
 
 const BarbersContext = createContext();
 
@@ -13,16 +14,19 @@ export const useBarbers = () => {
 
 const BarbersContextProvder = ({ children }) => {
   const { token } = useAuth();
-  const { data, loading } = useQuery(getAllBarbers);
-  const [allBarbers, setAllBarbers] = useState(data);
+  const [allBarbers, setAllBarbers] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setAllBarbers(data);
-  }, [data]);
+    setLoading(true);
+    getAllBarbers()
+      .then((barbers) => setAllBarbers(barbers))
+      .finally(() => setLoading(false));
+  }, []);
 
   const search = debounce((searchTerm) => {
-    console.log(searchTerm, data);
-    if (!searchTerm) return setAllBarbers(data);
+    // console.log(searchTerm, data);
+    // if (!searchTerm) return setAllBarbers(data);
 
     const filtered = allBarbers.filter(({ firstName, lastName }) => {
       return (

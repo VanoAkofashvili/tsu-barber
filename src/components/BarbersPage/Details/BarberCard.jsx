@@ -3,19 +3,19 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useAuth } from '../../../contexts/Auth.context';
-import { useBarbers } from '../../../contexts/Barbers.context';
+import { order } from '../../../services/barbers.service';
 import defaultAvatar from '../../../static/barber.png';
 import { Button } from '../../Atoms';
 
 const BarberCard = ({ barber, isOrdered, refetch }) => {
   const { token } = useAuth();
   const navigate = useNavigate();
-  const { order } = useBarbers();
+
   const [loading, setLoading] = useState(false);
 
   function orderBarber(id) {
     setLoading(true);
-    order(id).then((res) => {
+    order(id, token).then((res) => {
       setLoading(false);
       toast.success('Success');
       return refetch();

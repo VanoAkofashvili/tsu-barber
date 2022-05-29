@@ -1,12 +1,15 @@
 import { Form, Formik } from 'formik';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { useAuth } from '../../../contexts/Auth.context';
 import { Button, Input } from '../../Atoms';
-import AuthTemplate from '../AuthTemplate';
+import AuthTemplate from '..';
+import { login } from '../../../services/auth.service';
+import { toast } from 'react-toastify';
 
 const Login = () => {
-  const auth = useAuth();
+  const { setUser } = useAuth();
+  const navigate = useNavigate();
   return (
     <AuthTemplate title={'Login'}>
       <Formik
@@ -18,7 +21,15 @@ const Login = () => {
           email: Yup.string().email().required(),
           password: Yup.string().required(),
         })}
-        onSubmit={async (values) => await auth.signin(values)}
+        onSubmit={async ({ email, password }) => {
+          try {
+            const userId = await login(email, password);
+            setUser(userId);
+            navigate('/barbers');
+          } catch (e) {
+            toast.error(e.toString());
+          }
+        }}
       >
         {(formik) => {
           return (

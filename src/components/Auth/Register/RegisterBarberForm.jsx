@@ -1,8 +1,8 @@
 import { Form, Formik } from 'formik';
 import { Button, Input } from '../../Atoms';
 import * as Yup from 'yup';
-import { registerBarber } from '../../../api/auth';
 import { toast } from 'react-toastify';
+import { registerBarber } from '../../../services/auth.service';
 
 const RegisterBarberForm = () => {
   return (
@@ -29,13 +29,12 @@ const RegisterBarberForm = () => {
           .required()
           .oneOf([Yup.ref('password'), null], 'Passwords must match'),
       })}
-      onSubmit={async (values, { setErrors }) => {
+      onSubmit={async (values) => {
         try {
           await registerBarber(values);
-          toast.success('Account created, wait for clients');
+          toast.success('You have successfully registered as a barber');
         } catch (e) {
-          toast.error(e);
-          setErrors(e);
+          toast.error(e.toString());
         }
       }}
     >

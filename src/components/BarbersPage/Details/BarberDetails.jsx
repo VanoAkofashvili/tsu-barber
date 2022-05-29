@@ -1,23 +1,28 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getBarber, order } from '../../../api';
 import { useAuth } from '../../../contexts/Auth.context';
-import { useQuery } from '../../../hooks/useQuery';
+import { getBarber } from '../../../services/barbers.service';
 import Spinner from '../../Spinner';
 import BarberCard from './BarberCard';
 import BarberReviews from './BarberReviews';
 
 const BarberDetails = () => {
   const { barberId } = useParams();
-  const {
-    data: barber,
-    loading,
-    refetch,
-  } = useQuery(getBarber, { id: barberId });
+  const [barber, setBarber] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    getBarber(barberId).then((res) => {
+      setBarber(res);
+      setLoading(false);
+    });
+  }, [barberId]);
+
+  function refetch() {}
 
   const { token } = useAuth();
   const [isOrdered, setIsOrdered] = useState();
-  const userId = token?.split('.')[0];
+  const userId = token;
 
   useEffect(() => {
     if (barber?.clients?.includes(+userId)) {

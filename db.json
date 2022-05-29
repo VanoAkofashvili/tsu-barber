@@ -1,0 +1,47 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "vanikoakofa@gmail.com",
+      "password": "vano1234"
+    },
+    {
+      "id": 2,
+      "email": "vakhonodadze@gmail.com",
+      "password": "vakho1234"
+    },
+    {
+      "email": "vanikoakofa11@gmail.com",
+      "password": "vano1234",
+      "id": 3
+    }
+  ],
+  "barbers": [
+    {
+      "id": 1,
+      "firstName": "Manana",
+      "lastName": "Xachidze",
+      "email": "manano@gmail.com",
+      "address": "Tbilisi, ganivis mimdebare teritoria",
+      "price": 60,
+      "password": "mananiko123",
+      "clients": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      "reviews": [
+        {
+          "client": {
+            "id": 1,
+            "email": "vanikoakofa@gmail.com"
+          },
+          "star": 5,
+          "review": "Dzaan magari parikmaxeria :D"
+        }
+      ]
+    }
+  ]
+}

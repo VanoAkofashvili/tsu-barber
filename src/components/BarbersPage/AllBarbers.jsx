@@ -1,4 +1,5 @@
 import { map } from 'lodash';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useBarbers } from '../../contexts/Barbers.context';
 import { Button } from '../Atoms';
@@ -40,11 +41,11 @@ const AllBarbers = () => {
                 }
               )}
             </div>
-            {map(allBarbers, function renderEachBarber(barber) {
+            {map(allBarbers, function renderEachBarber(barber, idx) {
               const { id, firstName, lastName, price } = barber;
               return (
                 <div
-                  key={id}
+                  key={id + idx}
                   className="flex gap-2 border-b border-grey-10 py-3 items-center"
                 >
                   <p className="flex-1 text-purple-dark">{firstName}</p>

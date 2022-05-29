@@ -3,23 +3,18 @@ import { useState } from 'react';
 import StartRatings from 'react-star-ratings';
 import clientAvatar from '../../../static/default_avatar.png';
 import { Button } from '../../Atoms';
-import * as api from '../../../api';
+
 import { useAuth } from '../../../contexts/Auth.context';
+import { createReview } from '../../../services/barbers.service';
+
 const BarberReviews = ({ barberId, reviews = [], isOrdered, refetch }) => {
   const [rating, setRating] = useState(0);
   const [value, setValue] = useState('');
+
   const { token } = useAuth();
+
   function handleReview() {
-    api
-      .setReview({
-        barberId,
-        userId: token?.split('.')[0],
-        review: value,
-        star: rating,
-      })
-      .then(() => {
-        refetch();
-      });
+    createReview(barberId, token, value, rating).then(() => refetch());
   }
 
   return (
@@ -52,7 +47,7 @@ const BarberReviews = ({ barberId, reviews = [], isOrdered, refetch }) => {
         );
       })}
 
-      {isOrdered && (
+      {token && isOrdered && (
         <div className="p-5 m-5">
           <textarea
             placeholder="Say something about this barber"

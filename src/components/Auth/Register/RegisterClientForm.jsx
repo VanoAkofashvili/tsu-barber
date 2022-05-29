@@ -3,9 +3,14 @@ import { Button, Input } from '../../Atoms';
 import * as Yup from 'yup';
 
 import { useAuth } from '../../../contexts/Auth.context';
+import { registerClient } from '../../../services/auth.service';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const RegisterClientForm = () => {
   const auth = useAuth();
+  const navigate = useNavigate();
+
   return (
     <Formik
       initialValues={{
@@ -22,7 +27,15 @@ const RegisterClientForm = () => {
           .required()
           .oneOf([Yup.ref('password'), null], 'Passwords must match'),
       })}
-      onSubmit={async (values) => await auth.signup(values)}
+      onSubmit={async ({ email, password }) => {
+        try {
+          const { userId } = await registerClient(email, password);
+          auth.setUser(userId);
+          navigate('/barbers');
+        } catch (e) {
+          toast.error(e.toString());
+        }
+      }}
     >
       {(formik) => {
         return (

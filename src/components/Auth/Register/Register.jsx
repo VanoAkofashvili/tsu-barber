@@ -1,7 +1,7 @@
 import { Form, Formik } from 'formik';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import AuthTemplate from '../AuthTemplate';
+import AuthTemplate from '..';
 import RegisterBarberForm from './RegisterBarberForm';
 import RegisterClientForm from './RegisterClientForm';
 import { startCase } from 'lodash';
