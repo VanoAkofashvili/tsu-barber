@@ -9,6 +9,8 @@ export async function login(email, password) {
 
   if (user.password === password) {
     return user.id;
+  } else {
+    throw new Error('Invalid password');
   }
 }
 
