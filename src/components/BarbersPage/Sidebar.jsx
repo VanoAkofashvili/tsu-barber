@@ -1,4 +1,7 @@
+import { useAuth } from '../Auth/Auth.context';
+
 const Sidebar = () => {
+  const { signout } = useAuth();
   return (
     <aside className="w-44 h-full flex-shrink-0">
       <div className="h-full py-4 px-3 bg-purple-dark dark:bg-gray-800">
@@ -41,7 +44,9 @@ const Sidebar = () => {
                   clipRule="evenodd"
                 ></path>
               </svg>
-              <span className="flex-1 ml-3 whitespace-nowrap">Log out</span>
+              <span className="flex-1 ml-3 whitespace-nowrap" onClick={signout}>
+                Log out
+              </span>
             </a>
           </li>
         </ul>

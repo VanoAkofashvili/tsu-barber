@@ -1,12 +1,12 @@
 import { Form, Formik } from 'formik';
 import { Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import * as Yup from 'yup';
-import { login } from '../../../api/auth';
 import { Button, Input } from '../../Atoms';
+import { useAuth } from '../Auth.context';
 import AuthTemplate from '../AuthTemplate';
 
 const Login = () => {
+  const auth = useAuth();
   return (
     <AuthTemplate title={'Login'}>
       <Formik
@@ -18,19 +18,7 @@ const Login = () => {
           email: Yup.string().email().required(),
           password: Yup.string().required(),
         })}
-        onSubmit={async (values, { setErrors }) => {
-          try {
-            const data = await login(values || {});
-            localStorage.setItem('token', data?.secretToken);
-          } catch (e) {
-            console.log(e);
-            if (typeof e === 'string') {
-              toast.error(e);
-            } else {
-              setErrors(e);
-            }
-          }
-        }}
+        onSubmit={async (values) => await auth.signin(values)}
       >
         {(formik) => {
           return (

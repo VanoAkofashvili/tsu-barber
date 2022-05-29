@@ -24,8 +24,7 @@ export function login({ email, password }) {
     if (password === user.password) {
       resolve({
         success: true,
-        secretToken: user.id + 'secretToken',
-        user: user,
+        secretToken: user.id + '.secretToken',
       });
     } else {
       reject({ password: "Password isn't corrent" });
