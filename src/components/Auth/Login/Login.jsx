@@ -14,8 +14,8 @@ const Login = () => {
     <AuthTemplate title={'Login'}>
       <Formik
         initialValues={{
-          email: 'vanikoakofa@gmail.com',
-          password: 'vano1234',
+          email: '',
+          password: '',
         }}
         validationSchema={Yup.object({
           email: Yup.string().email().required(),

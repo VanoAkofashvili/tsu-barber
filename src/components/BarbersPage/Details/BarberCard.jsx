@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useAuth } from '../../../contexts/Auth.context';
+import { useLazyQuery } from '../../../hooks/useLazyQuery';
 import { order } from '../../../services/barbers.service';
 import defaultAvatar from '../../../static/barber.png';
 import { Button } from '../../Atoms';
@@ -10,17 +11,12 @@ import { Button } from '../../Atoms';
 const BarberCard = ({ barber, isOrdered, refetch }) => {
   const { token } = useAuth();
   const navigate = useNavigate();
-
-  const [loading, setLoading] = useState(false);
-
-  function orderBarber(id) {
-    setLoading(true);
-    order(id, token).then((res) => {
-      setLoading(false);
+  const [orderBarber, { loading }] = useLazyQuery(order, {
+    onCompleted: () => {
       toast.success('Success');
-      return refetch();
-    });
-  }
+      refetch();
+    },
+  });
 
   return (
     <div className="bg-neutral-50 w-1/3 flex flex-col gap-5 items-center border-l border-t border-b border-grey-10 rounded-tl-md rounded-bl-md">
@@ -46,7 +42,7 @@ const BarberCard = ({ barber, isOrdered, refetch }) => {
         <Button
           className={'w-2/3'}
           loading={loading}
-          onClick={() => orderBarber(barber.id)}
+          onClick={() => orderBarber(barber.id, token)}
           disabled={isOrdered}
         >
           {isOrdered ? 'Already ordered' : 'Order'}

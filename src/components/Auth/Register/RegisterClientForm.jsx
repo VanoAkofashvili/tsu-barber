@@ -14,9 +14,9 @@ const RegisterClientForm = () => {
   return (
     <Formik
       initialValues={{
-        email: 'vanikoakofa@gmail.com',
-        password: 'vano1234',
-        confirmPassword: 'vano1234',
+        email: '',
+        password: '',
+        confirmPassword: '',
       }}
       validationSchema={Yup.object({
         email: Yup.string().email().required(),

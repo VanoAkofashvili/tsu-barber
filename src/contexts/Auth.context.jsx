@@ -13,16 +13,9 @@ const AuthProvider = ({ children }) => {
     setToken(token);
   }, []);
 
-  function signout() {
-    setToken(null);
-    localStorage.removeItem('token');
-  }
-
   return (
     <AuthContext.Provider
       value={{
-        signout,
-
         token,
         setUser: (token) => {
           localStorage.setItem('token', token);

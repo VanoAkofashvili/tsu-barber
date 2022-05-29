@@ -2,7 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/Auth.context';
 
 const Sidebar = () => {
-  const { signout, token } = useAuth();
+  const { setUser, token } = useAuth();
   const navigate = useNavigate();
   return (
     <aside className="w-44 h-full flex-shrink-0">
@@ -45,7 +45,7 @@ const Sidebar = () => {
               </svg>
               <span
                 className="flex-1 ml-3 whitespace-nowrap"
-                onClick={token ? signout : () => navigate('/login')}
+                onClick={token ? () => setUser(null) : () => navigate('/login')}
               >
                 {token ? 'Log out' : 'Sign in'}
               </span>

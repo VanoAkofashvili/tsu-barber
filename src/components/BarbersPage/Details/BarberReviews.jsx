@@ -6,6 +6,7 @@ import { Button } from '../../Atoms';
 
 import { useAuth } from '../../../contexts/Auth.context';
 import { createReview } from '../../../services/barbers.service';
+import { useLazyQuery } from '../../../hooks/useLazyQuery';
 
 const BarberReviews = ({ barberId, reviews = [], isOrdered, refetch }) => {
   const [rating, setRating] = useState(0);
@@ -13,12 +14,16 @@ const BarberReviews = ({ barberId, reviews = [], isOrdered, refetch }) => {
 
   const { token } = useAuth();
 
-  function handleReview() {
-    createReview(barberId, token, value, rating).then(() => refetch());
-  }
+  const [handleReview] = useLazyQuery(createReview, {
+    onCompleted: () => refetch(),
+  });
+
+  // function handleReview() {
+  //   createReview(barberId, token, value, rating).then(() => refetch());
+  // }
 
   return (
-    <div className="bg-slate-300 w-2/3 border-t border-r border-b border-grey-10 rounded-tr-md rounded-br-md">
+    <div className="bg-slate-300 w-2/3 border-t border-r border-b border-grey-10 rounded-tr-md rounded-br-md overflow-y-auto">
       {map(reviews, function renderEachReview({ client, star, review }, index) {
         return (
           <div
@@ -67,7 +72,10 @@ const BarberReviews = ({ barberId, reviews = [], isOrdered, refetch }) => {
               starHoverColor="#5138ed"
               name="rating"
             />
-            <Button className={'w-20'} onClick={handleReview}>
+            <Button
+              className={'w-20'}
+              onClick={() => handleReview(barberId, token, value, rating)}
+            >
               Submit
             </Button>
           </div>

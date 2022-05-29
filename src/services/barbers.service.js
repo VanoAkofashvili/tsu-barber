@@ -17,7 +17,8 @@ export async function getBarber(id) {
 
 export async function order(barberId, userId) {
   const { data: barber } = await httpClient.get('/barbers/' + barberId);
-  const updatedBarber = { ...barber, clients: [userId, ...barber.clients] };
+
+  const updatedBarber = { ...barber, clients: [+userId, ...barber.clients] };
 
   const { data } = await httpClient.put('/barbers/' + barberId, updatedBarber);
   return { success: true };
@@ -25,9 +26,11 @@ export async function order(barberId, userId) {
 
 export async function createReview(barberId, userId, review, star) {
   const { data: barber } = await httpClient.get('/barbers/' + barberId);
+  const { data: user } = await httpClient.get('/users/' + userId);
+
   const updated = {
     ...barber,
-    reveiws: [
+    reviews: [
       {
         client: {
           id: userId,
@@ -40,6 +43,6 @@ export async function createReview(barberId, userId, review, star) {
     ],
   };
 
-  const { data } = await httpClient.put('/barbers' + barberId, updated);
+  const { data } = await httpClient.put('/barbers/' + barberId, updated);
   return { success: true };
 }

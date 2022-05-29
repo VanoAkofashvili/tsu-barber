@@ -14,6 +14,11 @@
       "email": "vanikoakofa11@gmail.com",
       "password": "vano1234",
       "id": 3
+    },
+    {
+      "email": "vanikoakofa111@gmail.com",
+      "password": "vano1234",
+      "id": 4
     }
   ],
   "barbers": [
@@ -26,11 +31,53 @@
       "price": 60,
       "password": "mananiko123",
       "clients": [
-        "1",
-        "1",
-        "1",
-        "1",
-        "1"
+        4,
+        1
+      ],
+      "reviews": [
+        {
+          "client": {
+            "id": 4,
+            "email": "vanikoakofa111@gmail.com"
+          },
+          "review": "vaaa",
+          "star": 5
+        },
+        {
+          "client": {
+            "id": 1,
+            "email": "vanikoakofa@gmail.com"
+          },
+          "review": "teslia",
+          "star": 0
+        },
+        {
+          "client": {
+            "id": "1",
+            "email": "vanikoakofa@gmail.com"
+          },
+          "review": "vano",
+          "star": 0
+        },
+        {
+          "client": {
+            "id": "1",
+            "email": "vanikoakofa@gmail.com"
+          },
+          "review": "",
+          "star": 5
+        }
+      ]
+    },
+    {
+      "firstName": "Vinme",
+      "lastName": "Axali",
+      "email": "mail@mail.rui",
+      "address": "Tbilisi",
+      "price": 100,
+      "password": "vano1234",
+      "clients": [
+        1
       ],
       "reviews": [
         {
@@ -38,10 +85,11 @@
             "id": 1,
             "email": "vanikoakofa@gmail.com"
           },
-          "star": 5,
-          "review": "Dzaan magari parikmaxeria :D"
+          "review": "axalia to yleobaa",
+          "star": 1
         }
-      ]
+      ],
+      "id": 2
     }
   ]
 }

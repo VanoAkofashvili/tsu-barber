@@ -21,7 +21,6 @@ export async function registerBarber({
   password,
 }) {
   const { data: all } = await httpClient.get('/barbers');
-  console.log(all);
   const exists = all.find((barber) => barber.email === email);
   if (exists) {
     throw new Error('Barber with provided email already exists');

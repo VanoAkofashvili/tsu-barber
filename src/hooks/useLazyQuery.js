@@ -1,24 +1,22 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
-export function useQuery(callback, ...args) {
+export function useLazyQuery(callback, { onCompleted = () => {} }) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  async function fetch() {
+
+  async function lazyFetch(...args) {
     try {
       setLoading(true);
       const response = await callback(...args);
-      setData(response);
+      onCompleted(response);
     } catch (e) {
-      console.error('useQuery:::', e);
+      console.log('useLazyQuery:::', e);
       setError(e);
     } finally {
       setLoading(false);
     }
   }
-  useEffect(() => {
-    fetch();
-  }, []);
 
-  return { data, loading, error, refetch: fetch };
+  return [lazyFetch, { data, loading, error }];
 }

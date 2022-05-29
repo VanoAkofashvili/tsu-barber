@@ -8,13 +8,13 @@ const RegisterBarberForm = () => {
   return (
     <Formik
       initialValues={{
-        firstName: 'vano',
-        lastName: 'akofa',
-        email: 'vanikoakofa@gmail.com',
-        address: 'Tbilisi',
-        price: 100,
-        password: 'vano1234',
-        confirmPassword: 'vano1234',
+        firstName: '',
+        lastName: '',
+        email: '',
+        address: '',
+        price: 0,
+        password: '',
+        confirmPassword: '',
       }}
       validationSchema={Yup.object({
         firstName: Yup.string().required(),
