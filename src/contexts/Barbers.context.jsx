@@ -38,6 +38,7 @@ const BarbersContextProvder = ({ children }) => {
   async function order(barberId) {
     return await api.order(barberId, token);
   }
+
   return (
     <BarbersContext.Provider value={{ allBarbers, loading, search, order }}>
       {children}

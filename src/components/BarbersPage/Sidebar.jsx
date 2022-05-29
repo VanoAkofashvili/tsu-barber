@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/Auth.context';
 
 const Sidebar = () => {
@@ -9,8 +9,8 @@ const Sidebar = () => {
       <div className="h-full py-4 px-3 bg-purple-dark dark:bg-gray-800">
         <ul className="space-y-2 h-full">
           <li>
-            <a
-              href="#"
+            <Link
+              to="/barbers"
               className="flex items-center p-2 text-base font-normal text-white rounded-lg"
             >
               <svg
@@ -26,14 +26,11 @@ const Sidebar = () => {
                 ></path>
               </svg>
               <span className="flex-1 ml-3 whitespace-nowrap">Barbers</span>
-            </a>
+            </Link>
           </li>
 
           <li>
-            <a
-              href="#"
-              className="flex items-center p-2 text-base font-normal text-white rounded-lg"
-            >
+            <div className="cursor-pointer flex items-center p-2 text-base font-normal text-white rounded-lg">
               <svg
                 className="flex-shrink-0 w-6 h-6 text-white transition duration-75"
                 fill="currentColor"
@@ -52,7 +49,7 @@ const Sidebar = () => {
               >
                 {token ? 'Log out' : 'Sign in'}
               </span>
-            </a>
+            </div>
           </li>
         </ul>
       </div>

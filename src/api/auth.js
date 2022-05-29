@@ -1,17 +1,22 @@
 import { delay } from './utils';
 import { barbers, clients } from './db';
 
-export function setReview({ clientId, barberId, review, star }) {
+export function setReview({ userId, barberId, review, star }) {
   return delay((res, rej) => {
+    const user = clients.find((c) => +c.id === +userId);
     const barber = barbers.find((barber) => barber.id === barberId);
-    barber.reviews = [
-      {
-        clientId,
-        review,
-        star,
+    console.log(barber);
+    const reviews = barber.reviews || [];
+
+    reviews.push({
+      client: {
+        id: userId,
+        email: user.email,
       },
-      ...barber.reviews,
-    ];
+      review,
+      star,
+    });
+    barber.reviews = reviews;
     res({ success: true });
   });
 }

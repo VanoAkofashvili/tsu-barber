@@ -39,7 +39,12 @@ const BarberDetails = () => {
         isOrdered={isOrdered}
         refetch={refetch}
       />
-      <BarberReviews reviews={barber?.reviews} />
+      <BarberReviews
+        barberId={barber?.id}
+        reviews={barber?.reviews}
+        isOrdered={isOrdered}
+        refetch={refetch}
+      />
     </div>
   );
 };
