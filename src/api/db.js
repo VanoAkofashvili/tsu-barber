@@ -16,6 +16,7 @@ export let barbers = [
     address: 'tbilisi',
     price: 100,
     password: 'vano1234',
+    clients: [1],
     reviews: [
       {
         client: {

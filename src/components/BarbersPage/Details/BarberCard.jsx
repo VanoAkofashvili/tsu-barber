@@ -1,12 +1,26 @@
 import { upperFirst } from 'lodash';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { useAuth } from '../../../contexts/Auth.context';
+import { useBarbers } from '../../../contexts/Barbers.context';
 import defaultAvatar from '../../../static/barber.png';
 import { Button } from '../../Atoms';
 
-const BarberCard = ({ barber }) => {
+const BarberCard = ({ barber, isOrdered, refetch }) => {
   const { token } = useAuth();
   const navigate = useNavigate();
+  const { order } = useBarbers();
+  const [loading, setLoading] = useState(false);
+
+  function orderBarber(id) {
+    setLoading(true);
+    order(id).then((res) => {
+      setLoading(false);
+      toast.success('Success');
+      return refetch();
+    });
+  }
 
   return (
     <div className="bg-neutral-50 w-1/3 flex flex-col gap-5 items-center border-l border-t border-b border-grey-10 rounded-tl-md rounded-bl-md">
@@ -29,7 +43,14 @@ const BarberCard = ({ barber }) => {
       </h2>
       <h3 className=" text-base">{barber.address}</h3>
       {token ? (
-        <Button className={'w-2/3'}>Order</Button>
+        <Button
+          className={'w-2/3'}
+          loading={loading}
+          onClick={() => orderBarber(barber.id)}
+          disabled={isOrdered}
+        >
+          {isOrdered ? 'Already ordered' : 'Order'}
+        </Button>
       ) : (
         <div className="mt-3">
           You must login to order{' '}

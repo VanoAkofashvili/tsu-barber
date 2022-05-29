@@ -19,3 +19,14 @@ export function getAllBarbers() {
     );
   });
 }
+
+export function order(barberId, token) {
+  return delay((res) => {
+    const userId = token.split('.')[0];
+    const barber = barbers.find((b) => String(b.id) === String(barberId));
+    const clients = barber.clients || [];
+    clients.push(+userId);
+    barber.clients = clients;
+    res({ success: true });
+  });
+}

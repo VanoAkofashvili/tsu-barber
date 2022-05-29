@@ -2,6 +2,8 @@ import { debounce, filter, toUpper } from 'lodash';
 import { createContext, useContext, useEffect, useState } from 'react';
 import { getAllBarbers } from '../api';
 import { useQuery } from '../hooks/useQuery';
+import { useAuth } from './Auth.context';
+import * as api from '../api';
 
 const BarbersContext = createContext();
 
@@ -10,6 +12,7 @@ export const useBarbers = () => {
 };
 
 const BarbersContextProvder = ({ children }) => {
+  const { token } = useAuth();
   const { data, loading } = useQuery(getAllBarbers);
   const [allBarbers, setAllBarbers] = useState(data);
 
@@ -32,8 +35,11 @@ const BarbersContextProvder = ({ children }) => {
     setAllBarbers(filtered);
   }, 200);
 
+  async function order(barberId) {
+    return await api.order(barberId, token);
+  }
   return (
-    <BarbersContext.Provider value={{ allBarbers, loading, search }}>
+    <BarbersContext.Provider value={{ allBarbers, loading, search, order }}>
       {children}
     </BarbersContext.Provider>
   );
