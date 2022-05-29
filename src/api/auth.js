@@ -61,9 +61,9 @@ function registerBarber(barber) {
 
     delete newBarber.passwordConfirmation;
 
-    barbers = barbers.concat(newBarber);
+    barbers.push(newBarber);
 
-    resolve({ ...newBarber, password: undefined });
+    resolve({ success: true });
   });
 }
 
@@ -79,8 +79,8 @@ async function registerClient({ email, password, confirmPassword }) {
       password,
     };
 
-    clients = clients.concat(newClient);
-    resolve(newClient);
+    clients.push(newClient);
+    resolve({ secretToken: newClient.id + '.secretToken' });
   });
 }
 

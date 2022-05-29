@@ -1,8 +1,8 @@
 import { Form, Formik } from 'formik';
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
+import { useAuth } from '../../../contexts/Auth.context';
 import { Button, Input } from '../../Atoms';
-import { useAuth } from '../Auth.context';
 import AuthTemplate from '../AuthTemplate';
 
 const Login = () => {

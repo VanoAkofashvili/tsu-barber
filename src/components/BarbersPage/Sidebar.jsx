@@ -1,7 +1,9 @@
-import { useAuth } from '../Auth/Auth.context';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../contexts/Auth.context';
 
 const Sidebar = () => {
-  const { signout } = useAuth();
+  const { signout, token } = useAuth();
+  const navigate = useNavigate();
   return (
     <aside className="w-44 h-full flex-shrink-0">
       <div className="h-full py-4 px-3 bg-purple-dark dark:bg-gray-800">
@@ -44,8 +46,11 @@ const Sidebar = () => {
                   clipRule="evenodd"
                 ></path>
               </svg>
-              <span className="flex-1 ml-3 whitespace-nowrap" onClick={signout}>
-                Log out
+              <span
+                className="flex-1 ml-3 whitespace-nowrap"
+                onClick={token ? signout : () => navigate('/login')}
+              >
+                {token ? 'Log out' : 'Sign in'}
               </span>
             </a>
           </li>

@@ -1,9 +1,11 @@
 import { Form, Formik } from 'formik';
 import { Button, Input } from '../../Atoms';
 import * as Yup from 'yup';
-import { registerClient } from '../../../api/auth';
+
+import { useAuth } from '../../../contexts/Auth.context';
 
 const RegisterClientForm = () => {
+  const auth = useAuth();
   return (
     <Formik
       initialValues={{
@@ -20,13 +22,7 @@ const RegisterClientForm = () => {
           .required()
           .oneOf([Yup.ref('password'), null], 'Passwords must match'),
       })}
-      onSubmit={async (values, { setErrors }) => {
-        try {
-          const data = await registerClient(values);
-        } catch (e) {
-          setErrors(e);
-        }
-      }}
+      onSubmit={async (values) => await auth.signup(values)}
     >
       {(formik) => {
         return (

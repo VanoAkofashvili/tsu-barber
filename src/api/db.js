@@ -46,3 +46,8 @@ export let clients = [
     password: 'vano1234',
   },
 ];
+
+window.db = {
+  clients,
+  barbers,
+};

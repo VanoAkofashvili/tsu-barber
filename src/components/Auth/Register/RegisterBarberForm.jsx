@@ -31,15 +31,11 @@ const RegisterBarberForm = () => {
       })}
       onSubmit={async (values, { setErrors }) => {
         try {
-          const data = await registerBarber(values);
-          toast.success('Account created');
+          await registerBarber(values);
+          toast.success('Account created, wait for clients');
         } catch (e) {
-          if (typeof e === 'stirng') {
-            // If generic error
-            toast.error(e);
-          } else {
-            setErrors(e); // If fields is specified
-          }
+          toast.error(e);
+          setErrors(e);
         }
       }}
     >
